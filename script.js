@@ -1,4 +1,4 @@
-// Second try
+
 
 const board = document.getElementById('board');
 const turnEl = document.getElementById('turn');
@@ -32,42 +32,54 @@ while (i < 100) {
 }
 
 function checkWin() {
-    let r = 0;
+    var r = 0;
     while (r < 10) {
-        let c = 0;
-        while (c < 6) {
-            let idx = r * 10 + c;
-            if (cells[idx].textContent !== '' &&
-                cells[idx].textContent === cells[idx + 1].textContent &&
-                cells[idx].textContent === cells[idx + 2].textContent &&
-                cells[idx].textContent === cells[idx + 3].textContent &&
-                cells[idx].textContent === cells[idx + 4].textContent) {
-                return true;
+        var count = 0;
+        var c = 0;
+        while (c < 10) {
+            var pos = r * 10 + c;
+                if (cells[pos].textContent == turn) {
+                        count = count + 1;
+                        if (count == 5) {
+                        return true;
+                                        }
+                } else {
+                count = 0;
             }
-            c++;
+            c = c + 1;
         }
-        r++;
+        r = r + 1;
     }
 
-    r = 0;
-    while (r < 6) {
-        let c = 0;
-        while (c < 10) {
-            let idx = r * 10 + c;
-            if (cells[idx].textContent !== '' &&
-                cells[idx].textContent === cells[idx + 10].textContent &&
-                cells[idx].textContent === cells[idx + 20].textContent &&
-                cells[idx].textContent === cells[idx + 30].textContent &&
-                cells[idx].textContent === cells[idx + 40].textContent) {
-                return true;
+    var col = 0;
+    while (col < 10) {
+        var count2 = 0;
+        var row = 0;
+        while (row < 10) {
+            var pos2 = row * 10 + col;
+                    if (cells[pos2].textContent == turn) {
+                             count2 = count2 + 1;
+                            if (count2 == 5) {
+                            return true;
+                                             }
+                    } else {
+                count2 = 0;
             }
-            c++;
+            row = row + 1;
         }
-        r++;
+        col = col + 1;
     }
 
     return false;
 }
 
-resetBtn.addEventListener('click', () => {
-    let k 
+resetBtn.onclick = function() {
+    var n = 0;
+    while (n < 100) {
+        cells[n].textContent = '';
+        n = n + 1;
+    }
+    turn = 'X';
+    gameOver = false;
+    turnEl.innerHTML = 'Turn: X';
+};
