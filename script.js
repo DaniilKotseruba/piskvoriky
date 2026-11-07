@@ -1,4 +1,4 @@
-
+////////////FINAL//////////////////// i hope so
 const board = document.getElementById('board');
 const turnEl = document.getElementById('turn');
 const resetBtn = document.getElementById('reset');
@@ -31,11 +31,15 @@ while (i < 100) {
         if (gameOver == true) {
             return;
         }
+        // * AI Generated
+        // * Model:  OpenAI GPT-5.6-sol
+        // fix: proverka data-bomb pered hit/////////////////////////////////////////////
         if (bombMode == true) {
             if (this.getAttribute('data-bomb') == 'false' && this.textContent == '') {
                 this.setAttribute('data-bomb', 'true');
                 bombsCount = bombsCount + 1;
                 turnEl.innerHTML = 'Bombs hidden: ' + bombsCount + ' / 4';
+                ////////////////////////////////////////////////////////////////////////
 
                 if (bombsCount == 4) {
                     bombMode = false;
@@ -78,7 +82,21 @@ while (i < 100) {
     cells.push(cell);
     i = i + 1;
 }
+if (bombBtn) {
+    bombBtn.onclick = function() {
+        bombMode = true;
+        bombsCount = 0;
 
+        let k = 0;
+        while (k < 100) {
+            cells[k].setAttribute('data-bomb', 'false');
+            cells[k].textContent = '';
+            k = k + 1;
+        }
+
+        turnEl.innerHTML = 'Click cells to hide 4 bombs (0 / 4)';
+    };
+}
     function checkWin() {
         var r = 0;
         while (r < 10) {
@@ -104,7 +122,7 @@ while (i < 100) {
             var count2 = 0;
             var row = 0;
             while (row < 10) {
-                var pos2 = row * 10 + col;
+                var pos2 = row * 10 + col; ///
                 if (cells[pos2].textContent == turn) {
                     count2 = count2 + 1;
                     if (count2 == 5) {
@@ -117,7 +135,6 @@ while (i < 100) {
             }
             col = col + 1;
         }
-
         return false;
     }
 
